@@ -1,0 +1,28 @@
+﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Mvc;
+using Odata_3_1.Interfaces;
+using Odata_3_1.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Odata_3_1.Controllers
+{
+    public class TestSuitesController : ODataController
+    {
+        ITestSuiteRepository _repository = null;
+
+        public TestSuitesController(ITestSuiteRepository repository)
+        {
+            _repository = repository;
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        public async Task< IEnumerable<TestSuite> > Get()
+        {
+            return await _repository.GetTestSuites();
+        }
+    }
+}
